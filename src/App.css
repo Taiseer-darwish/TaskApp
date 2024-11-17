@@ -1,0 +1,12 @@
+i{
+  @apply text-teal-500 mx-2 cursor-pointer text-lg
+}
+.Delet{
+  @apply  bg-red-700 px-3 py-1 mx-1 text-base font-bold rounded-xl float-right mt-14 mr-3
+}
+input{
+  @apply bg-transparent outline-none  text-white text-lg w-full p-1;
+}
+li{
+  @apply list-none
+}
