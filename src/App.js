@@ -8,28 +8,28 @@ import { v4 as uuidv4 } from "uuid";
 const initialToDo = [
   {
     id: uuidv4(),
-    content: "",
+    content: "-",
     isEditing: true,
-    IsCompleted: false,
+    isCompleted: false,
   },
   {
     id: uuidv4(),
     content: "-",
     isEditing: true,
-    IsCompleted: false,
+    isCompleted: false,
   },
   {
     id: uuidv4(),
     content: "-",
     isEditing: true,
-    IsCompleted: false,
+    isCompleted: false,
   },
 ];
 
 function App() {
   const [todos, settodos] = useState(initialToDo);
   return <>
- <div className=" bg-[#161618] h-screen ">
+ <div className=" bg-[#161618] min-h-screen relative">
   <TodoContext.Provider value={{todos:todos , settodos:settodos}}>
   <ToDoList/>
   </TodoContext.Provider>

@@ -17,3 +17,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+i{
+  @apply text-teal-500 cursor-pointer sm:text-sm md:text-base lg:text-lg
+}
+.Delet{
+  @apply  bg-red-700 px-3 py-1 mx-1 text-base font-bold rounded-xl float-right mt-14 mr-3
+}
+input{
+  @apply bg-transparent outline-none  text-white sm:text-sm md:text-base lg:text-lg w-full p-1;
+}
+li{
+  @apply list-none
+}
+.The-Output,
+.The-Input{
+  box-shadow: 1px 0px 5px 2px #577e8034;
+}
+.Button{
+  @apply sm:text-xs md:text-sm lg:text-base sm:p-0
+}

@@ -21,7 +21,7 @@ export default function ToDo({ todo }) {
   function ToggoleIcone() {
     const UPdatetodos = value.todos.map((el) => {
       if (el.id === todo.id) {
-        el.IsCompleted = !el.IsCompleted;
+        el.isCompleted = !el.isCompleted;
       }
       return el;
     });
@@ -49,7 +49,7 @@ export default function ToDo({ todo }) {
   function HandelEdit() {
     const updatedElements = value.todos.map((el) => {
       if (el.id === todo.id) {
-        return { ...todo, isEditing: false, IsCompleted: false };
+        return { ...todo, isEditing: false, isCompleted: false };
       } else {
         return el;
       }
@@ -90,10 +90,10 @@ export default function ToDo({ todo }) {
             <Grid item xs={1} className="  ">
               <i
                 onClick={ToggoleIcone}
-                class={
-                  todo.IsCompleted
-                    ? "fa-regular fa-circle-check text-[#2ea050cb]"
-                    : "fa-regular fa-circle text-[#771717cb] " 
+                className={
+                  todo.isCompleted
+                    ? "fa-regular fa-circle-check text-[#2ea050cb] mr-2"
+                    : "fa-regular fa-circle text-[#771717cb] mr-2 " 
                 }
               ></i>
             </Grid>
@@ -118,8 +118,8 @@ export default function ToDo({ todo }) {
               )}
             </Grid>
             <Grid item xs={2} className=" flex justify-end">
-              <i className= { todo.isEditing ? "fa-solid fa-pencil text-[#ffffff]" :"u" }onClick={HandelEdit}></i>
-              <i className="fa-solid fa-trash text-[#ffffff5d]" onClick={HandelDelet}></i>
+              <i className="fa-solid fa-pencil text-[#ffffff] mx-1 " onClick={HandelEdit}></i>
+              <i className="fa-solid fa-trash text-[#ffffff5d] mx-1 " onClick={HandelDelet}></i>
             </Grid>
           </Grid>
         </CardContent>

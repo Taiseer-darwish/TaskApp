@@ -18,40 +18,25 @@ import ToDo from "./ToDo";
 
 export default function ToDoList() {
   const [input, setinput] = useState("");
-  const [ButtonType, setButtonType] = useState("");
+  const [taskFilter, settaskFilter] = useState("all");
   const value = useContext(TodoContext);
 
-  const DoneTodos = value.todos.filter((el) => {
-    return el.IsCompleted;
-  });
-  const NotcompletedTodos = value.todos.filter((el) => {
-    return !el.IsCompleted;
-  });
-  let AllToDos = value.todos;
-
   //----------------------------------
-  if (ButtonType === "Done") {
-    AllToDos = DoneTodos;
-  } else if (ButtonType === "NotComplet") {
-    AllToDos = NotcompletedTodos;
-  } else {
-    AllToDos = value.todos;
-  }
-  //-------------------------
-
-  //----------------------------------------
-  const todojsx = AllToDos.map((el) => {
-    return <ToDo key={el.id} todo={el} />;
-  });
-  //-------------------------------
+  const filterdTask =
+    taskFilter === "all"
+      ? value.todos
+      : taskFilter === "done"
+      ? value.todos.filter((el) => el.isCompleted)
+      : value.todos.filter((el) => !el.isCompleted);
+  //----------------------------------
 
   function HandelAdd() {
-    if(input !== ""){
+    if (input !== "") {
       const NewTodo = {
         id: uuidv4(),
         content: input,
         isEditing: true,
-        IsCompleted: false,
+        isCompleted: false,
       };
       const updateNewTodo = [...value.todos, NewTodo];
       value.settodos(updateNewTodo);
@@ -62,14 +47,14 @@ export default function ToDoList() {
 
   useEffect(() => {
     const Storagetodo = JSON.parse(localStorage.getItem("todos"));
-
     value.settodos(Storagetodo);
+    // eslint-disable-next-line
   }, []);
 
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="lg" className=" relative p-5 text-white bg-[#161618] ">
+      <Container maxWidth="lg" className=" p-5 text-white bg-[#161618] ">
         <Card
           sx={{
             minWidth: 275,
@@ -81,7 +66,7 @@ export default function ToDoList() {
         >
           <CardContent>
             {/*TEXT */}
-            <h1 className=" text-center text-5xl my-7 text-teal-600 font-bold">
+            <h1 className=" text-5xl text-teal-600  text-center my-7 font-bold">
               To-Do App
             </h1>
             {/*TEXT */}
@@ -115,37 +100,39 @@ export default function ToDoList() {
               <Stack spacing={1} direction="row">
                 <Button
                   variant="outlined"
-                  className="!text-[#bebebe] !border-gray-400 !font-bold"
+                  className="Button !text-[#bebebe] !border-gray-400 !font-bold"
                   onClick={() => {
-                    setButtonType("ALL");
+                    settaskFilter("all");
                   }}
                 >
-                  ALL ({AllToDos.length})
+                  ALL({value.todos.length})
                 </Button>
                 <Button
                   variant="outlined"
-                  className="!text-[#34c25fe1] !border-[#2ea0505d]"
+                  className="Button !text-[#34c25fe1] !border-[#2ea0505d]"
                   onClick={() => {
-                    setButtonType("Done");
+                    settaskFilter("done");
                   }}
                 >
-                  Done ({DoneTodos.length})
+                  Done( {value.todos.filter((el) => el.isCompleted).length})
                 </Button>
                 <Button
                   variant="outlined"
+                  className="Button"
                   color="error"
                   onClick={() => {
-                    setButtonType("NotComplet");
+                    settaskFilter("notComplet");
                   }}
                 >
-                  Not Complet ({NotcompletedTodos.length})
+                  Not Complet({value.todos.filter((el) => !el.isCompleted).length})
                 </Button>
               </Stack>
-
               {/*<Buttons */}
 
               {/*ToDo*/}
-              {todojsx}
+              {filterdTask.map((el) => {
+                return <ToDo key={el.id} todo={el} />;
+              })}
               {/*ToDo*/}
             </div>
           </CardContent>
